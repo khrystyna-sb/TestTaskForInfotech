@@ -9,6 +9,10 @@ import UIKit
 
 class CityTableViewCell: UITableViewCell {
     
+    private enum Constants {
+        static let indent: CGFloat = 10.0
+    }
+    
     static let identifier = "CityTableViewCell"
     
     private let containerStackView: UIStackView = {
@@ -19,7 +23,7 @@ class CityTableViewCell: UITableViewCell {
         return stackView
     }()
     
-    private let picture: UIImageView = {
+    private lazy var picture: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -37,6 +41,7 @@ class CityTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupContainerStackView()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -49,7 +54,17 @@ class CityTableViewCell: UITableViewCell {
         containerStackView.addArrangedSubview(cityNameLabel)
     }
     
-    public func configure(image: UIImage, name: String) {
+    private func setupConstraints() {
+        
+        NSLayoutConstraint.activate([
+            containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.indent),
+            containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.indent),
+            containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.indent),
+            containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.indent)
+        ])
+    }
+    
+    public func configure(image: UIImage?, name: String) {
         picture.image = image
         cityNameLabel.text = name
     }

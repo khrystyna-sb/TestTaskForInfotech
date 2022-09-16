@@ -15,7 +15,7 @@ class CityListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchBar()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(CityTableViewCell.self, forCellReuseIdentifier: CityTableViewCell.identifier)
     }
     
     private func setupSearchBar() {
@@ -34,22 +34,26 @@ class CityListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.identifier, for: indexPath) as? CityTableViewCell else { return UITableViewCell() }
         let city = viewModel.listOfCities[indexPath.row]
-        cell.textLabel?.text = city.name
+        if indexPath.row % 2 == 0 {
+            cell.configure(image: viewModel.oddImage, name: city.name)
+        } else {
+            cell.configure(image: viewModel.evenImage, name: city.name)
+        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let repositoryDetailsViewController = RepositoryDetailsViewController()
-//        repositoryDetailsViewController.githubRepositoryResult = viewModel?.githubRepositoryResults?.items[indexPath.row]
-//        navigationController?.pushViewController(repositoryDetailsViewController, animated: true)
+        //        let repositoryDetailsViewController = RepositoryDetailsViewController()
+        //        repositoryDetailsViewController.githubRepositoryResult = viewModel?.githubRepositoryResults?.items[indexPath.row]
+        //        navigationController?.pushViewController(repositoryDetailsViewController, animated: true)
     }
 }
 
 extension CityListTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
+        
     }
 }
 

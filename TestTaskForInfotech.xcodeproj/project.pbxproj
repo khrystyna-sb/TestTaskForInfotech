@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C50360AF28D2065E00C4D3E2 /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50360AE28D2065E00C4D3E2 /* CityTableViewCell.swift */; };
 		C529ED0228D266F2001334E0 /* city_list copy.json in Resources */ = {isa = PBXBuildFile; fileRef = C529ED0128D266F2001334E0 /* city_list copy.json */; };
+		C57E6F7528D49D6400D8FC65 /* CityListImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C57E6F7428D49D6400D8FC65 /* CityListImageFetcher.swift */; };
 		C597BB7628BCB7B400516F39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C597BB7528BCB7B400516F39 /* AppDelegate.swift */; };
 		C597BB7828BCB7B400516F39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C597BB7728BCB7B400516F39 /* SceneDelegate.swift */; };
 		C597BB7A28BCB7B400516F39 /* CityListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C597BB7928BCB7B400516F39 /* CityListTableViewController.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		C50360AE28D2065E00C4D3E2 /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
 		C529ED0128D266F2001334E0 /* city_list copy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "city_list copy.json"; sourceTree = "<group>"; };
+		C57E6F7428D49D6400D8FC65 /* CityListImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListImageFetcher.swift; sourceTree = "<group>"; };
 		C597BB7228BCB7B400516F39 /* TestTaskForInfotech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTaskForInfotech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C597BB7528BCB7B400516F39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C597BB7728BCB7B400516F39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				C529ED0128D266F2001334E0 /* city_list copy.json */,
 				C597BB8B28BCC48F00516F39 /* city_list.json */,
 				C597BB8D28BCC74200516F39 /* CityListDataFetcher.swift */,
+				C57E6F7428D49D6400D8FC65 /* CityListImageFetcher.swift */,
 			);
 			path = DataFetching;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				C50360AF28D2065E00C4D3E2 /* CityTableViewCell.swift in Sources */,
 				C597BB9028BCC77600516F39 /* CityListViewModel.swift in Sources */,
 				C597BB7A28BCB7B400516F39 /* CityListTableViewController.swift in Sources */,
+				C57E6F7528D49D6400D8FC65 /* CityListImageFetcher.swift in Sources */,
 				C597BB7628BCB7B400516F39 /* AppDelegate.swift in Sources */,
 				C597BB8E28BCC74200516F39 /* CityListDataFetcher.swift in Sources */,
 				C597BB7828BCB7B400516F39 /* SceneDelegate.swift in Sources */,
