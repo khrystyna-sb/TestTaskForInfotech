@@ -11,6 +11,7 @@ class CityTableViewCell: UITableViewCell {
     
     private enum Constants {
         static let indent: CGFloat = 10.0
+        static let spacing: CGFloat = 15
     }
     
     static let identifier = "CityTableViewCell"
@@ -18,13 +19,14 @@ class CityTableViewCell: UITableViewCell {
     private let containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fillProportionally
+        stackView.spacing = Constants.spacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
-    private lazy var picture: UIImageView = {
-        let imageView = UIImageView()
+    private lazy var picture: LoadingImageView = {
+        let imageView = LoadingImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -60,12 +62,18 @@ class CityTableViewCell: UITableViewCell {
             containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.indent),
             containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.indent),
             containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constants.indent),
-            containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.indent)
+            containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.indent),
         ])
     }
     
-    public func configure(image: UIImage?, name: String) {
-        picture.image = image
-        cityNameLabel.text = name
+    public func configure(with model: CityViewModel) {
+        self.cityNameLabel.text = model.name
+        self.picture.loadImage(mainPath: model.url)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.cityNameLabel.text = ""
+        self.picture.cancelLoading()
     }
 }

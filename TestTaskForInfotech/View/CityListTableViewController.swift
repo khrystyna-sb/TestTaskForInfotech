@@ -9,13 +9,45 @@ import UIKit
 
 class CityListTableViewController: UITableViewController {
     
+    private enum Constants {
+        static let heightForRow: CGFloat = 90
+    }
+    
     private let searchController = UISearchController(searchResultsController: nil)
-    private let viewModel = CityListViewModel()
+    private var cities: [CityViewModel] = []
+    private let jsonParser: JSONParserProtocol?
+    
+    init() {
+        self.jsonParser = JSONParser()
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSearchBar()
+        getCities()
         tableView.register(CityTableViewCell.self, forCellReuseIdentifier: CityTableViewCell.identifier)
+    }
+    
+    private func getCities() {
+        guard let jsonParser = jsonParser else { return }
+        let result = jsonParser.parseJSON(file: "city_list")
+        switch result {
+        case .success(let models):
+            let result: [CityViewModel] = models
+                .enumerated()
+                .compactMap { tuple in
+                    let path = tuple.offset.isMultiple(of: 2) ? Path.evenUrl : Path.oddUrl
+                    return CityViewModel(name: tuple.element.name, url: path, coordinates: tuple.element.coord)
+            }
+            self.cities = result
+        case .failure(let error):
+            print(error)
+        }
     }
     
     private func setupSearchBar() {
@@ -26,28 +58,21 @@ class CityListTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if viewModel.listOfCities.count > 30 {
-            return 30
-        } else {
-            return viewModel.listOfCities.count
-        }
+        return cities.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.identifier, for: indexPath) as? CityTableViewCell else { return UITableViewCell() }
-        let city = viewModel.listOfCities[indexPath.row]
-        if indexPath.row % 2 == 0 {
-            cell.configure(image: viewModel.oddImage, name: city.name)
-        } else {
-            cell.configure(image: viewModel.evenImage, name: city.name)
-        }
+        let city = cities[indexPath.row]
+        cell.configure(with: city)
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Constants.heightForRow
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let repositoryDetailsViewController = RepositoryDetailsViewController()
-        //        repositoryDetailsViewController.githubRepositoryResult = viewModel?.githubRepositoryResults?.items[indexPath.row]
-        //        navigationController?.pushViewController(repositoryDetailsViewController, animated: true)
     }
 }
 
