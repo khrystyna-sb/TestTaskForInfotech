@@ -15,6 +15,7 @@ class CityListTableViewController: UITableViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     private var cities: [CityViewModel] = []
+    private var filteredCities: [CityViewModel]?
     private let jsonParser: JSONParserProtocol?
     
     init() {
@@ -28,8 +29,15 @@ class CityListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupSearchBar()
         getCities()
+        setSubViews()
+    }
+    
+    private func setSubViews() {
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.delegate = self
+        tableView.tableHeaderView = self.searchController.searchBar
         tableView.register(CityTableViewCell.self, forCellReuseIdentifier: CityTableViewCell.identifier)
     }
     
@@ -50,20 +58,22 @@ class CityListTableViewController: UITableViewController {
         }
     }
     
-    private func setupSearchBar() {
-        navigationItem.searchController = searchController
-        searchController.searchBar.delegate = self
+    private func filterCitiesBySearchText(_ searchText: String) {
+        self.filteredCities = self.cities.filter { $0.name.lowercased().contains(searchText.lowercased())}
+        self.tableView.reloadData()
     }
+    
+
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cities.count
+        return filteredCities?.count ?? cities.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.identifier, for: indexPath) as? CityTableViewCell else { return UITableViewCell() }
-        let city = cities[indexPath.row]
+        let city = filteredCities?[indexPath.row] ?? cities[indexPath.row]
         cell.configure(with: city)
         return cell
     }
@@ -78,7 +88,8 @@ class CityListTableViewController: UITableViewController {
 
 extension CityListTableViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        self.filterCitiesBySearchText(searchText)
+        tableView.reloadData()
     }
 }
 

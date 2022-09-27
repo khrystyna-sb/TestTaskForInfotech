@@ -20,7 +20,7 @@
 		C597BB7A28BCB7B400516F39 /* CityListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C597BB7928BCB7B400516F39 /* CityListTableViewController.swift */; };
 		C597BB7F28BCB7B800516F39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C597BB7E28BCB7B800516F39 /* Assets.xcassets */; };
 		C597BB8228BCB7B800516F39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C597BB8028BCB7B800516F39 /* LaunchScreen.storyboard */; };
-		C597BB8A28BCC47400516F39 /* CityListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C597BB8928BCC47400516F39 /* CityListDataModel.swift */; };
+		C597BB8A28BCC47400516F39 /* CityDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C597BB8928BCC47400516F39 /* CityDataModel.swift */; };
 		C597BB8C28BCC48F00516F39 /* city_list.json in Resources */ = {isa = PBXBuildFile; fileRef = C597BB8B28BCC48F00516F39 /* city_list.json */; };
 		C597BB9028BCC77600516F39 /* CityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C597BB8F28BCC77600516F39 /* CityViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -43,7 +43,7 @@
 		C597BB7E28BCB7B800516F39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C597BB8128BCB7B800516F39 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C597BB8328BCB7B800516F39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C597BB8928BCC47400516F39 /* CityListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListDataModel.swift; sourceTree = "<group>"; };
+		C597BB8928BCC47400516F39 /* CityDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDataModel.swift; sourceTree = "<group>"; };
 		C597BB8B28BCC48F00516F39 /* city_list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city_list.json; sourceTree = "<group>"; };
 		C597BB8F28BCC77600516F39 /* CityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -109,7 +109,7 @@
 		C50360B328D2070E00C4D3E2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C597BB8928BCC47400516F39 /* CityListDataModel.swift */,
+				C597BB8928BCC47400516F39 /* CityDataModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -282,7 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C575ABF428E1F3450007D00E /* NetworkService.swift in Sources */,
-				C597BB8A28BCC47400516F39 /* CityListDataModel.swift in Sources */,
+				C597BB8A28BCC47400516F39 /* CityDataModel.swift in Sources */,
 				C50360AF28D2065E00C4D3E2 /* CityTableViewCell.swift in Sources */,
 				C597BB9028BCC77600516F39 /* CityViewModel.swift in Sources */,
 				C575ABF828E220870007D00E /* JSONParser.swift in Sources */,
