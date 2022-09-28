@@ -17,8 +17,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = CityListTableViewController()
+        
+        let navigationController = UINavigationController()
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
+        
+        let cityListTableViewController = CityListTableViewController()
+        navigationController.pushViewController(cityListTableViewController, animated: false)
     }
 }
 

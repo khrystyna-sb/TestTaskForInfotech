@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 protocol JSONParserProtocol {
     func parseJSON(file: String) -> Result<[City], AppError>
 }
