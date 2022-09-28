@@ -52,8 +52,9 @@ final class WeatherViewController: UIViewController, MKMapViewDelegate {
         recieveWeatherModel()
     }
     
-    private func fillStackView(viewModel: WeatherViewModel) {
-        descriptionLabel.text = "The weather is " + viewModel.description
+    private func fillSubviews(viewModel: WeatherViewModel) {
+        setupMapView(with: viewModel.coordinates)
+        descriptionLabel.text = viewModel.description + " in " + viewModel.name
         currentTemperatureLabel.text = "Current temperature: \(viewModel.currentTemperature)"
         minTemperatureLabel.text = "Min temp: \(viewModel.minTemperature)"
         maxTemperature.text = "Max temp: \(viewModel.maxTemperature)"
@@ -65,7 +66,7 @@ final class WeatherViewController: UIViewController, MKMapViewDelegate {
         self.weatherApi.loadWeather(coordinates: self.coordinates) { [weak self] result in
             switch result {
             case .success(let model):
-                self?.fillStackView(viewModel: WeatherViewModel.create(weatherModel: model))
+                self?.fillSubviews(viewModel: WeatherViewModel.create(weatherModel: model))
             case .failure(let error):
                 print(error)
             }

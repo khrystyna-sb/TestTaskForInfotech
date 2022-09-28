@@ -8,6 +8,7 @@
 import Foundation
 
 struct WeatherViewModel {
+    let name: String
     let description: String
     let currentTemperature: Double
     let minTemperature: Double
@@ -17,13 +18,14 @@ struct WeatherViewModel {
     let coordinates: Coordinates
     
     static func create(weatherModel: WeatherDataModel) -> Self {
-        return .init(description: weatherModel.weather[0].description,
+        return .init(name: weatherModel.name,
+                     description: weatherModel.weather[0].description,
                      currentTemperature: weatherModel.main.temp,
                      minTemperature: weatherModel.main.temp_min,
                      maxTemperature: weatherModel.main.temp_max,
                      humidity: weatherModel.main.humidity,
-                         windSpeed: weatherModel.wind.speed,
-                         coordinates: weatherModel.coord)
+                     windSpeed: weatherModel.wind.speed,
+                     coordinates: weatherModel.coord)
     }
 }
 

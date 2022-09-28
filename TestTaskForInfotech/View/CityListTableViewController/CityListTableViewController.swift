@@ -92,7 +92,3 @@ extension CityListTableViewController: UISearchBarDelegate {
         tableView.reloadData()
     }
 }
-
-
-
-

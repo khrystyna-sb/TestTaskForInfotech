@@ -10,7 +10,7 @@ import Foundation
 protocol NetworkServiceProtocol {
     @discardableResult func perform(request: URLRequest,
                                     completion: @escaping (Result<(Data?, HTTPURLResponse), Error>) -> Void)
-        -> URLSessionDataTask
+    -> URLSessionDataTask
 }
 
 class NetworkService: NetworkServiceProtocol {
@@ -34,5 +34,5 @@ class NetworkService: NetworkServiceProtocol {
             dataTask.resume()
             
             return dataTask
-    }
+        }
 }
