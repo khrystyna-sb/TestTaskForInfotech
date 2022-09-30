@@ -16,10 +16,10 @@ final class CityListTableViewController: UITableViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     private var cities: [CityViewModel] = []
     private var filteredCities: [CityViewModel]?
-    private let jsonParser: JSONParserProtocol
+/*    private let jsonParser: JSONParserProtocol */
     
     init() {
-        self.jsonParser = JSONParser()
+  /*      self.jsonParser = JSONParser() */
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,7 +29,7 @@ final class CityListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getCities()
+    /*    getCities() */
         setSubViews()
     }
     
@@ -40,7 +40,8 @@ final class CityListTableViewController: UITableViewController {
         tableView.tableHeaderView = self.searchController.searchBar
         tableView.register(CityTableViewCell.self, forCellReuseIdentifier: CityTableViewCell.identifier)
     }
-    
+ 
+    /*
     private func getCities() {
         let result = jsonParser.parseJSON(file: "city_list")
         switch result {
@@ -56,6 +57,7 @@ final class CityListTableViewController: UITableViewController {
             print(error)
         }
     }
+     */
     
     private func filterCitiesBySearchText(_ searchText: String) {
         self.filteredCities = self.cities.filter { $0.name.lowercased().contains(searchText.lowercased())}

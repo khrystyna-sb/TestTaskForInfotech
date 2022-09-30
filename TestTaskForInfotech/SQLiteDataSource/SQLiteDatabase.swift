@@ -9,14 +9,17 @@ import Foundation
 import SQLite
 
 class SQLiteDatabase {
+    
     static let shared = SQLiteDatabase()
     var database: Connection?
     
     private init() {
-        guard let fileURL = Bundle.main.url(forResource: "city_list", withExtension: "json") else { return }
+        guard let dbPath = Bundle.main.path(forResource: "db", ofType: "sqlite") else { return }
         do {
-            database = try Connection(fileURL.path)
+            print("copy SQLFile from \(dbPath)")
+            database = try Connection(dbPath)
         } catch {
+            database = nil
             fatalError("Failed to create connection to database. \(error)")
         }
     }

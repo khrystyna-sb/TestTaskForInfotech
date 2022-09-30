@@ -26,7 +26,6 @@ class WeatherApiIntegration: WeatherApiIntegrationProtocol {
 
     func loadWeather(coordinates: Coordinates, completion: @escaping (Result<WeatherDataModel, Error>) -> Void) {
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(coordinates.lat)&lon=\(coordinates.lon)&appid=\(Constants.apiKey)") else { return }
-        print(url)
         self.dataTask = self.networkService.perform(request: URLRequest(url: url), completion: { [weak self] result in
             guard let `self` = self else { return }
             DispatchQueue.main.async {

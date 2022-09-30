@@ -10,13 +10,14 @@ import SQLite
 
 class SQLiteCommands {
     
-    static var table = Table("cityList")
+    static var table = Table("cities")
     
     static let id = Expression<Int>("id")
     static let name = Expression<String>("name")
     static let country = Expression<String>("country")
     static let state = Expression<String>("state")
-//    static let coord = Expression<Coordinates>("coord")
+    static let lon = Expression<Double>("lon")
+    static let lat = Expression<Double>("lat")
     
     static func createTable() {
         guard let database = SQLiteDatabase.shared.database else { fatalError("Datastore connection error") }
@@ -27,35 +28,33 @@ class SQLiteCommands {
                 table.column(name)
                 table.column(country)
                 table.column(state)
-//                table.column(coord)
+                table.column(lon)
+                table.column(lat)
             })
         } catch {
             print("Table already exists: \(error)")
         }
     }
-
-//    static func presentRows(rowAtIndexPath: Int) -> [City]? {
-//        guard let database = SQLiteDatabase.shared.database else {
-//            print("Datastore connection error")
-//            return nil
-//        }
-//        
-// 
-//        var cityArray = [City]()
-//
-//        table = table.order(id.desc)
-//        
-//        do {
-//            for city in try database.prepare(table.limit(50, offset: rowAtIndexPath)) {
-//                
-//                let city = City(id: city[id], name: city[name], country: city[country], state: city[state])
-//                
-//                cityArray.append(city)
-//            }
-//        } catch {
-//            print("Present row erros: \(error)")
-//        }
-//        
-//        return cityArray
-//    }
+    
+    static func insertRow(with city: City) {
+        guard let database = SQLiteDatabase.shared.database else {
+            print("Datastore connection error")
+            return
+        }
+        do {
+            try database.run(table.insert(
+                id <- city.id,
+                name <- city.name,
+                country <- city.country,
+                state <- city.state,
+                lon <- city.coord.lon,
+                lat <- city.coord.lat))
+        } catch let Result.error(message, code, statement) where code == SQLITE_CONSTRAINT {
+            print("Insert row failed: \(message), in \(String(describing: statement))")
+        } catch {
+            print("Insert row failed: \(error)")
+        }
+    }
+    
+    
 }
