@@ -56,5 +56,62 @@ class SQLiteCommands {
         }
     }
     
+    static func defaultCities() -> [City]? {
+        
+        guard let database = SQLiteDatabase.shared.database else {
+            print("Datastore connection error")
+            return nil
+        }
+        
+        var cities = [City]()
+        
+        do {
+            for row in try database.prepare(table.limit(100)) {
+                let rowId = row[id]
+                let rowName = row[name]
+                let rowCountry = row[country]
+                let rowState = row[state]
+                let rowLontitude = row[lon]
+                let rowLatitude = row[lat]
+                
+                let city = City(id: rowId, name: rowName, country: rowCountry, state: rowState, coord: Coordinates(lon: rowLontitude, lat: rowLatitude))
+                
+                cities.append(city)
+            }
+        } catch {
+            print("Present row erros: \(error)")
+        }
+        
+        return cities
+    }
     
+    static func filteredCities(searchingText: String) -> [City]? {
+        
+        guard let database = SQLiteDatabase.shared.database else {
+            print("Datastore connection error")
+            return nil
+        }
+        
+        var cities = [City]()
+        
+        do {
+            for row in try database.prepare(table.filter(name.like("\(searchingText)%")).limit(10)) {
+                let rowId = row[id]
+                let rowName = row[name]
+                let rowCountry = row[country]
+                let rowState = row[state]
+                let rowLontitude = row[lon]
+                let rowLatitude = row[lat]
+                
+                let city = City(id: rowId, name: rowName, country: rowCountry, state: rowState, coord: Coordinates(lon: rowLontitude, lat: rowLatitude))
+                
+                cities.append(city)
+            }
+        } catch {
+            print("Present row erros: \(error)")
+        }
+        
+        return cities
+    }
 }
+

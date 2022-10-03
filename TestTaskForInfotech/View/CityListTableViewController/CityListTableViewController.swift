@@ -16,20 +16,10 @@ final class CityListTableViewController: UITableViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     private var cities: [CityViewModel] = []
     private var filteredCities: [CityViewModel]?
-/*    private let jsonParser: JSONParserProtocol */
-    
-    init() {
-  /*      self.jsonParser = JSONParser() */
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    /*    getCities() */
+        getCities()
         setSubViews()
     }
     
@@ -40,30 +30,31 @@ final class CityListTableViewController: UITableViewController {
         tableView.tableHeaderView = self.searchController.searchBar
         tableView.register(CityTableViewCell.self, forCellReuseIdentifier: CityTableViewCell.identifier)
     }
- 
-    /*
+    
+    
     private func getCities() {
-        let result = jsonParser.parseJSON(file: "city_list")
-        switch result {
-        case .success(let models):
-            let result: [CityViewModel] = models
-                .enumerated()
-                .compactMap { tuple in
-                    let path = tuple.offset.isMultiple(of: 2) ? Path.evenUrl : Path.oddUrl
-                    return CityViewModel(name: tuple.element.name, url: path, coordinates: tuple.element.coord)
+        guard let defaultCities = SQLiteCommands.defaultCities() else { return }
+        let result: [CityViewModel] = defaultCities
+            .enumerated()
+            .compactMap { tuple in
+                let path = tuple.offset.isMultiple(of: 2) ? Path.evenUrl : Path.oddUrl
+                return CityViewModel(name: tuple.element.name, url: path, coordinates: tuple.element.coord)
             }
-            self.cities = result
-        case .failure(let error):
-            print(error)
-        }
+        self.cities = result
     }
-     */
     
     private func filterCitiesBySearchText(_ searchText: String) {
-        self.filteredCities = self.cities.filter { $0.name.lowercased().contains(searchText.lowercased())}
+        guard let filteredCities = SQLiteCommands.filteredCities(searchingText: searchText) else { return }
+        let result: [CityViewModel] = filteredCities
+            .enumerated()
+            .compactMap { tuple in
+                let path = tuple.offset.isMultiple(of: 2) ? Path.evenUrl : Path.oddUrl
+                return CityViewModel(name: tuple.element.name, url: path, coordinates: tuple.element.coord)
+            }
+        self.filteredCities = result
         self.tableView.reloadData()
     }
-        
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
