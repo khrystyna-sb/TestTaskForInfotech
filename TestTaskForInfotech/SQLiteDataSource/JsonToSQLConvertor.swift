@@ -40,7 +40,7 @@ class JsonToSQLConverter {
             let dataBase = SQLiteDatabase.shared
             dataBase.createTable()
             for index in 0..<models.count {
-               SQLiteCommands.insertRow(with: models[index])
+               CitiesProvider.insertRow(with: models[index])
             }
             print("inserting completed")
         case .failure(let error):

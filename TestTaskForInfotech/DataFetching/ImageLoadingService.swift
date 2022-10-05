@@ -26,12 +26,14 @@ enum ImageError: Error {
 
 class ImageLoadingService: ImageLoadingServiceProtocol {
     
+    static let shared = ImageLoadingService()
+    
     private let cache: NSCache<NSURL, UIImage>
     private let networkService: NetworkServiceProtocol
     private let queue: DispatchQueue
     private var dataTask: URLSessionDataTask?
     
-    init(networkService: NetworkServiceProtocol = NetworkService(),
+    private init(networkService: NetworkServiceProtocol = NetworkService(),
          queue: DispatchQueue = .main) {
         self.cache = .init()
         self.networkService = networkService

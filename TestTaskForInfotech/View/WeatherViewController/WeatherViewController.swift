@@ -64,9 +64,15 @@ final class WeatherViewController: UIViewController, MKMapViewDelegate {
 
     private func recieveWeatherModel() {
         self.weatherApi.loadWeather(coordinates: self.coordinates) { [weak self] result in
+            
+            
             switch result {
             case .success(let model):
+                
+                // dispatch main async
                 self?.fillSubviews(viewModel: WeatherViewModel.create(weatherModel: model))
+                
+                
             case .failure(let error):
                 print(error)
             }

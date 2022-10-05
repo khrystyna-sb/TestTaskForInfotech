@@ -24,7 +24,6 @@ struct Main: Decodable {
     let temp_min: Double
     let temp_max: Double
     let humidity: Int
-    
 }
 
 struct Wind: Decodable {

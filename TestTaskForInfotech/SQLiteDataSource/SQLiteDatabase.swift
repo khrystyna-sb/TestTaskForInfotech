@@ -26,6 +26,6 @@ class SQLiteDatabase {
     
     //Creating Table
     func createTable() {
-        SQLiteCommands.createTable()
+        CitiesProvider.createTable()
     }
 }

@@ -22,6 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
+        // presenter pattern
         let cityListTableViewController = CityListTableViewController()
         navigationController.pushViewController(cityListTableViewController, animated: false)
     }

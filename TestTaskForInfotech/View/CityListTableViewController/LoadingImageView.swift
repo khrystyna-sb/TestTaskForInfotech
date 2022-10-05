@@ -8,7 +8,7 @@
 import UIKit
 
 class LoadingImageView: UIImageView {
-    private let loadingService: ImageLoadingServiceProtocol = ImageLoadingService()
+    private let loadingService: ImageLoadingServiceProtocol = ImageLoadingService.shared
     deinit {
         self.cancelLoading()
     }

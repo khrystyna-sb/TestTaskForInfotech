@@ -28,6 +28,7 @@ class WeatherApiIntegration: WeatherApiIntegrationProtocol {
         guard let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?lat=\(coordinates.lat)&lon=\(coordinates.lon)&appid=\(Constants.apiKey)") else { return }
         self.dataTask = self.networkService.perform(request: URLRequest(url: url), completion: { [weak self] result in
             guard let `self` = self else { return }
+            // main queue in Weather API?
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data, _):

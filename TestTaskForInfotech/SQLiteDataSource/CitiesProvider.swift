@@ -1,5 +1,5 @@
 //
-//  SQLiteCommands.swift
+//  CitiesProvider.swift
 //  TestTaskForInfotech
 //
 //  Created by Roma Test on 24.09.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import SQLite
 
-class SQLiteCommands {
+class CitiesProvider {
     
     static var table = Table("cities")
     
@@ -85,7 +85,7 @@ class SQLiteCommands {
         return cities
     }
     
-    static func filteredCities(searchingText: String) -> [City]? {
+    static func filteredCities(searchText: String) -> [City]? {
         
         guard let database = SQLiteDatabase.shared.database else {
             print("Datastore connection error")
@@ -95,7 +95,7 @@ class SQLiteCommands {
         var cities = [City]()
         
         do {
-            for row in try database.prepare(table.filter(name.like("\(searchingText)%")).limit(10)) {
+            for row in try database.prepare(table.filter(name.like("\(searchText)%")).limit(10)) {
                 let rowId = row[id]
                 let rowName = row[name]
                 let rowCountry = row[country]
