@@ -2,7 +2,7 @@
 //  CityListTableViewModel.swift
 //  TestTaskForInfotech
 //
-//  Created by Roma Test on 05.10.2022.
+//  Created by Khrystyna Matasova on 05.10.2022.
 //
 
 import Foundation

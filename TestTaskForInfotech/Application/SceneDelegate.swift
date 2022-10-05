@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  TestTaskForInfotech
 //
-//  Created by Roma Test on 29.08.2022.
+//  Created by Khrystyna Matasova on 29.08.2022.
 //
 
 import UIKit

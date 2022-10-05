@@ -2,7 +2,7 @@
 //  CitiesProvider.swift
 //  TestTaskForInfotech
 //
-//  Created by Roma Test on 24.09.2022.
+//  Created by Khrystyna Matasova on 24.09.2022.
 //
 
 import Foundation

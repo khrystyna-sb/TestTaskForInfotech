@@ -2,7 +2,7 @@
 //  WeatherViewModel.swift
 //  TestTaskForInfotech
 //
-//  Created by Roma Test on 27.09.2022.
+//  Created by Khrystyna Matasova on 27.09.2022.
 //
 
 import Foundation
